@@ -3,7 +3,6 @@ const path = require('path');
 
 
 const homeRouterHandler = (request, response) => {
-  console.log('dirname: ', __dirname);
   const htmlPath = path.join(__dirname, "../Public/index.html");
   const html = fs.readFile ( htmlPath, (error, html) => {
   if (error) {
@@ -18,7 +17,6 @@ const homeRouterHandler = (request, response) => {
 
 
 const publicHandler = (request, response) => {
-  console.log("hey mate");
   const filePath = path.join(__dirname,"..", request.url)
   const extension = request.url.split(".")[1]
   const contentTypeMapping = {
