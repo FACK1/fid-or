@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const dbConnection = require('./database/db_connection.js');
 
 
 const homeRouterHandler = (request, response) => {
@@ -39,26 +40,17 @@ const publicHandler = (request, response) => {
 }
 
 const onLoad = (request, response) =>{
-var array = [
-    {
-      id: 0,
-      description:"Make Breakfast",
-      completed:false
-    },
-
-    { id:1,
-      description:"Studying for exams",
-      completed:true
-    },
-
-    { id:2,
-      description:"Listen to music",
-      completed:false
+  //get data from the database
+  dbConnection.query('SELECT * FROM tododb', (err, result) => {
+    if (err) {
+      console.log("Error")
+      console.log(err);
+    } else {
+        console.log(result);
+        response.writeHead(200, {"content-type":"application/json"})
+        response.end(JSON.stringify(result.rows));
     }
-  ]
-
-    response.writeHead(200, {"content-type":"application/json"})
-    response.end(JSON.stringify(array));
+  });
 };
 
 const errorhandler = (request, response) => {
