@@ -38,11 +38,39 @@ const publicHandler = (request, response) => {
 
 }
 
+const onLoad = (request, response) =>{
+var array = [
+    {
+      id: 0,
+      description:"Make Breakfast",
+      completed:false
+    },
 
+    { id:1,
+      description:"Studying for exams",
+      completed:true
+    },
+
+    { id:2,
+      description:"Listen to music",
+      completed:false
+    }
+  ]
+
+    response.writeHead(200, {"content-type":"application/json"})
+    response.end(JSON.stringify(array));
+};
+
+const errorhandler = (request, response) => {
+  response.writeHead(404, {"content-type":"text/plain"})
+  response.end("Sorry! Server Error!")
+}
 
  const handlers = {
   homeRouterHandler,
   publicHandler,
+  onLoad,
+  errorhandler
   // addHandler,
   // deleteHandler,
   // updateHandler
