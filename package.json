@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/FACK1/fid-or/issues"
   },
-  "homepage": "https://github.com/FACK1/fid-or#readme"
+  "homepage": "https://github.com/FACK1/fid-or#readme",
+  "dependencies": {
+    "env2": "^2.2.2",
+    "pg": "^7.7.1"
+  }
 }
