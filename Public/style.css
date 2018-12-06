@@ -1,3 +1,101 @@
+* {
+  margin:0;
+  padding:0;
+}
+
+header{
+background-image: url(https://media.istockphoto.com/photos/todo-list-personal-planner-on-turquoise-office-table-picture-id925734296?k=6&m=925734296&s=612x612&w=0&h=_VB2egSpS_1RFYSknOl8v19wqT7dMbeRv8duolALfDc=);
+background-repeat: no-repeat;
+background-position: 15%;
+text-align: center;
+image: cover;
+font-family: 'Amaranth', sans-serif;
+color: #0f3f42;
+height: 50vh;
+display:flex;
+flex-direction: column;
+}
+
+
+
 body {
-  background-color: blue;
+  width: 100%;
+  /* margin: 15px; */
+  background-color: #256f79;
+  /* background-repeat: no-repeat; */
+  /* padding-bottom: 10%; */
+}
+
+.form-div{
+  padding-top: 10%;
+  padding-bottom: 15%;
+}
+
+
+.todo-container{
+  border: blue;
+  text-align: center;
+  font-size: 25px;
+  font-family: 'Courgette', cursive;
+  color: #061617;
+  background-color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 30px;
+
+}
+
+.form-div {
+  width:100%
+}
+
+h1{
+  padding-top: 6.5%;
+  color: #0f3f42;
+}
+
+h2{
+  padding-top: 12%;
+  height: 20%;
+  color: #0f3f42;
+}
+
+#add-button{
+  color: #feb03bf0;
+
+  border-color: #feb03bf0;
+  border-radius: 5px;
+  background-color: white;
+  width:20%;
+  height: 38px;
+
+}
+
+#todo-text{
+  height: 25px;
+  width:50%;
+  border-radius: 5px;
+  border-color: #feb03bf0;
+  padding:5px;
+
+  margin:auto;
+  }
+
+::placeholder{
+  color: #feb03bf0;
+}
+
+.headings-div {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding:10px;
+  margin: auto;
+  width:100%;
+}
+
+.form-div {
+  margin: auto;
+  width:100%;
+}
+h2{
+  margin:20px;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding:20px;
 }
