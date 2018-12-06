@@ -19,6 +19,8 @@
   "homepage": "https://github.com/FACK1/fid-or#readme",
   "dependencies": {
     "env2": "^2.2.2",
+    "node": "^11.3.0",
+    "nodemon": "^1.18.7",
     "pg": "^7.7.1"
   }
 }

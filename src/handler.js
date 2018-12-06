@@ -1,6 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 const dbConnection = require('./database/db_connection.js');
+const queryString = require('querystring');
+
 
 
 const homeRouterHandler = (request, response) => {
@@ -43,27 +45,56 @@ const onLoad = (request, response) =>{
   //get data from the database
   dbConnection.query('SELECT * FROM tododb', (err, result) => {
     if (err) {
-      console.log("Error")
+      console.log("Error HERE IN THE DATABASE!!!")
       console.log(err);
     } else {
-        console.log(result);
+        // console.log(result);
         response.writeHead(200, {"content-type":"application/json"})
         response.end(JSON.stringify(result.rows));
     }
   });
 };
 
+const addHandler = (request, response) => {
+  let collectedData = '';
+  request.on('data', chunk => {
+    collectedData += chunk;
+  });
+
+  request.on('end', () => {
+    console.log(collectedData);
+    var descriptionObj = queryString.parse(collectedData);
+    console.log({descriptionObj})
+    var values = [descriptionObj.description];
+    dbConnection.query(
+      `INSERT INTO tododb (description) VALUES (${values[0]})`,
+      values,
+      (err, res) => {
+        if (err) return cb(err);
+        cb(null, res);
+      }
+    );
+    // console.log("DESCRIPTION: " ,description);
+    // postData(description, err => {
+    //   if (err) return serverError(err, response);
+    //   homeHandler(response);
+    // });
+  });
+
+};
+
+
 const errorhandler = (request, response) => {
   response.writeHead(404, {"content-type":"text/plain"})
   response.end("Sorry! Server Error!")
-}
+};
 
  const handlers = {
   homeRouterHandler,
   publicHandler,
   onLoad,
-  errorhandler
-  // addHandler,
+  errorhandler,
+  addHandler
   // deleteHandler,
   // updateHandler
 }

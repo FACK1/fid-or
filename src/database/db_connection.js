@@ -5,7 +5,6 @@ const {DB_URL} =process.env;
 
 if (!DB_URL){
   throw Error ("No Database URL");
-
 }
 
 const option = {

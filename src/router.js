@@ -12,7 +12,9 @@ const router = (request, response) => {
     handlers.publicHandler(request, response)
   } else if (url === "/onload"){
     handlers.onLoad(request, response)
-  }else{
+  }else if (url === `/add`){
+    handlers.addHandler(request, response)
+}else{
     handlers.errorhandler(request, response);
   }
 }
