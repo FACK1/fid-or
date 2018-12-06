@@ -37,7 +37,7 @@ The app's idea is a todoList, which allows the other to add their tasks and stor
 
 5- Go the root directory ("fid-or" in this case), make a file "config.env".
 
-6- Copy paste this into the file. "DB_URL = postgres://tododb:0000@localhost:5432/tododb". This is to establish connection between our server and database. And it is used throughout the code of the app.
+6- Copy paste this into the file. "DB_URL = postgres://todouser:0000@localhost:5432/tododb". This is to establish connection between our server and database. And it is used throughout the code of the app.
 
 7- Now, we need to install two modules that our app relies on to funciton. Those are **pg** and **env2**. Run the command ```npm i pg env2``` to install them in one go. 
 
