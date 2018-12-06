@@ -13,9 +13,9 @@
         <h2>Organize your tasks!</h2>
       </div>
       <div class="form-div">
-        <form>
-          <input type="text" id="todo-text">
-          <button type="button" id="add-button">Add</button>
+        <form method="POST" action="/add">
+          <input name="description" type="text" id="todo-text" placeholder="Add your todo item!">
+          <button type="submit" id="add-button">Add</button>
         </form>
       </div>
     </header>
