@@ -21,13 +21,16 @@ The app's idea is a todoList, which allows the other to add their tasks and stor
 
 1- Testing. All kinds of testing. For the functions, server, and database.
 
-2 - Hosring our app on Heroku. (We included a section at the bottom to explain how to run it on your machine). 
+2 - Hosting our app on Heroku. (We included a section at the bottom to explain how to run it on your machine). 
 
 ### How to run our app on your machine?
 
 1- Clone this repo. 
 
-#### Before you move on to the next steps, you need to have psql and pgcli installed on your machine. (Keep in mind that pgcli is actually optional, but we're going to use it here for its simple commands and nice layout of data).
+#### NOTE: you need to have psql and pgcli installed on your machine. (Keep in mind that pgcli is actually optional, but we're going to use it here for its simple commands and nice layout of data).
+
+
+#### It should be noted that you need to run pgcli in your terminal before proceeding. To do this: type in ```pgcli``` in your terminal, and hit enter. 
 
 2- Now run the command ```CREATE DATABASE tododb;``` on your terminal, after you cd into the repo you just cloned. This command will create a database. Notice how there should be a semi-colon after every command.
 
