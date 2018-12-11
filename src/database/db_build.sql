@@ -1,15 +1,21 @@
 BEGIN;
 
+DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS tododb CASCADE;
+
+CREATE TABLE users(
+  id SERIAL PRIMARY KEY,
+  username VARCHAR(15) UNIQUE,
+  password VARCHAR(255)
+);
 
 CREATE TABLE tododb(
 id SERIAL PRIMARY kEY,
-description VARCHAR(255) NOT NULL,
-completed BOOLEAN NOT NULL DEFAULT false
+description VARCHAR(160),
+completed BOOLEAN NOT NULL DEFAULT false,
+user_id INTEGER REFERENCES users(id)
 );
 
-INSERT INTO tododb (description, completed) VALUES
-('make breakfast', false),
-('study for exams', true);
+
 
 COMMIT;

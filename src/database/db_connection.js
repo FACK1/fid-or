@@ -11,5 +11,4 @@ if (!DB_URL){
 const option = {
   connectionString : DB_URL
 };
-
 module.exports = new Pool (option);
