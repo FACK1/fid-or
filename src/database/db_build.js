@@ -8,5 +8,8 @@ db_connection.query(build_file, (error, result) =>{
     console.log ("failed", error);
   } else {
     console.log("Success!");
+    db_connection.end(()=>{
+      console.log('connection closed');
+    })
   }
 });
