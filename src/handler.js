@@ -10,7 +10,7 @@ const homeRouterHandler = (request, response) => {
   const html = fs.readFile ( htmlPath, (error, html) => {
   if (error) {
     response.writeHead (500, {"content-type": "text/plain"});
-    response.end("Server Error!");
+    response.end("Server Error here!");
     return;
   }
     response.writeHead(200, {"content-type": "text/html"});
@@ -31,7 +31,7 @@ const publicHandler = (request, response) => {
   fs.readFile ( filePath, (error, file) => {
     if (error) {
       response.writeHead (500, {"content-type": "text/html"});
-      response.end("<h1> Server Error! </h1>");
+      response.end("<h1> Server Error! HEEEREEEE!</h1>");
       return;
     }
     response.writeHead(200, {"content-type": contentTypeMapping[extension]});
@@ -51,6 +51,7 @@ const signUpHandler = (request, response) => {
 
   request.on('end', () => {
 
+
     const { username, password } = JSON.parse(body)
     bcrypt.genSalt(10, function(err, salt) {
     bcrypt.hash(password, salt, function(hashErr, hashed) {
@@ -60,12 +61,11 @@ const signUpHandler = (request, response) => {
         response.end('Error registering')
         return
       }
-      const userArray = [username, hashed];
-      const addUserString = `INSERT INTO users (username, password) VALUES ($1, $2)`;
+      var userArray = [username, hashed];
 
-      dbConnection.query(addUserString,userArray,(err, dbRes) => {
+      dbConnection.query(`INSERT INTO users (username, password) VALUES ($1, $2)`,userArray,
+       (err, result) => {
           if (err) {
-            console.log("Error")
             console.log(err);
           } else {
 
@@ -79,9 +79,46 @@ const signUpHandler = (request, response) => {
 })
 }
 
+/*-----login handler ---*/
 
 
+const loginHandler = (request, response) => {
+  let loginBody = '';
+  request.on('data', (data) => {
+    loginBody += data;
+  })
 
+  request.on('end', () => {
+  const { username, password } = JSON.parse(loginBody)
+
+  const passQuery = `select password from users where username = $1`;
+
+  dbConnection.query(passQuery, [username],
+   (err, existingPass) => {
+     if (err){
+       console.log(err)
+     } else {
+       bcrypt.compare(password, existingPass.rows[0].password, (err, passwordsMatch) => {
+      if (err) {
+        res.statusCode = 500;
+        res.end('Error logging in')
+        return
+      }
+      else if (!passwordsMatch) {
+
+        response.writeHead(302, {'content-type': 'text/plain'})
+        response.end('There was a problem with your login details')
+      }
+      else{
+        
+          response.writeHead(302, {"location": "/Public/todo-list.html"});
+          response.end();
+          };
+        })
+      }
+    })
+   })
+  }
 
 
 
@@ -113,6 +150,7 @@ const errorhandler = (request, response) => {
  const handlers = {
   homeRouterHandler,
   signUpHandler,
+  loginHandler,
   publicHandler,
   // onLoad,
   errorhandler,

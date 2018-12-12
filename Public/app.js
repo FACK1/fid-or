@@ -14,6 +14,7 @@ form.addEventListener("submit", function(event){
 
   fetch("/signUp", {
     method: 'POST',
+    // redirected:"follow",
     body: JSON.stringify(user_data),
     headers:{
       'Content-Type': 'application/json'
