@@ -12,12 +12,9 @@ form.addEventListener("submit", function(event){
     password: `${password}`
   }
 
-  const data =  JSON.stringify(user_data)
-  // console.log({data})
   fetch("/signUp", {
-    method: 'POST', // or 'PUT'
-    redirect: 'follow',
-    body: JSON.stringify(user_data), // data can be `string` or {object}!
+    method: 'POST',
+    body: JSON.stringify(user_data),
     headers:{
       'Content-Type': 'application/json'
     },

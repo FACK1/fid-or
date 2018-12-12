@@ -35,7 +35,6 @@ const publicHandler = (request, response) => {
       return;
     }
     response.writeHead(200, {"content-type": contentTypeMapping[extension]});
-    console.log('sending file')
     response.end(file);
   });
 
@@ -61,17 +60,16 @@ const signUpHandler = (request, response) => {
         response.end('Error registering')
         return
       }
-      var userArray = [username, hashed];
+      const userArray = [username, hashed];
+      const addUserString = `INSERT INTO users (username, password) VALUES ($1, $2)`;
 
-      dbConnection.query(`INSERT INTO users (username, password) VALUES ($1, $2)`,userArray,
-       (err, result) => {
+      dbConnection.query(addUserString,userArray,(err, dbRes) => {
           if (err) {
             console.log("Error")
             console.log(err);
           } else {
-              console.log(result);
+
               response.writeHead(301, {"Location":"/Public/login.html"})
-              console.log(response)
               response.end();
               return
           }

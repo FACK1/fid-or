@@ -9,7 +9,7 @@ const router = (request, response) => {
   if ( url === '/') {
     handlers.homeRouterHandler(request, response)
   } else if ( url.includes('/Public/')){
-    console.log('public')
+    
     handlers.publicHandler(request, response)
   }else if ( url === ('/signUp')){
       handlers.signUpHandler(request, response)
