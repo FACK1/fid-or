@@ -1,6 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 const dbConnection = require('./database/db_connection.js');
+const bcrypt = require('bcryptjs');
+const qs = require('querystring');
 
 
 const homeRouterHandler = (request, response) => {
@@ -39,19 +41,69 @@ const publicHandler = (request, response) => {
 
 }
 
-const onLoad = (request, response) =>{
-  //get data from the database
-  dbConnection.query('SELECT * FROM tododb', (err, result) => {
-    if (err) {
-      console.log("Error")
-      console.log(err);
-    } else {
-        console.log(result);
-        response.writeHead(200, {"content-type":"application/json"})
-        response.end(JSON.stringify(result.rows));
-    }
+
+const signUpHandler = (request, response) => {
+
+  let body = '';
+  request.on('data', (data) => {
+    body += data;
   });
-};
+
+  request.on('end', () => {
+
+    const { username, password } = JSON.parse(body)
+    bcrypt.genSalt(10, function(err, salt) {
+    bcrypt.hash(password, salt, function(hashErr, hashed) {
+
+        if (hashErr) {
+        response.statusCode = 500;
+        response.end('Error registering')
+        return
+      }
+      const userArray = [username, hashed];
+      const addUserString = `INSERT INTO users (username, password) VALUES ($1, $2)`;
+
+      dbConnection.query(addUserString,userArray,(err, dbRes) => {
+          if (err) {
+            console.log("Error")
+            console.log(err);
+          } else {
+
+              response.writeHead(301, {"Location":"/Public/login.html"})
+              response.end();
+              return
+          }
+    })
+  })
+})
+})
+}
+
+
+
+
+
+
+
+
+
+
+
+
+//
+// const onLoad = (request, response) =>{
+//   //get data from the database
+//   dbConnection.query('SELECT * FROM tododb', (err, result) => {
+//     if (err) {
+//       console.log("Error")
+//       console.log(err);
+//     } else {
+//         console.log(result);
+//         response.writeHead(200, {"content-type":"application/json"})
+//         response.end(JSON.stringify(result.rows));
+//     }
+//   });
+// };
 
 const errorhandler = (request, response) => {
   response.writeHead(404, {"content-type":"text/plain"})
@@ -60,9 +112,10 @@ const errorhandler = (request, response) => {
 
  const handlers = {
   homeRouterHandler,
+  signUpHandler,
   publicHandler,
-  onLoad,
-  errorhandler
+  // onLoad,
+  errorhandler,
   // addHandler,
   // deleteHandler,
   // updateHandler

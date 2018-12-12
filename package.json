@@ -18,7 +18,11 @@
   },
   "homepage": "https://github.com/FACK1/fid-or#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "env2": "^2.2.2",
     "pg": "^7.7.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.8"
   }
 }

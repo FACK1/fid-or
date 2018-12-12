@@ -1,18 +1,27 @@
 var form = document.getElementById("reg-form");
-var username = document.getElementById("username").value;
-var password = document.getElementById("password").value;
-var user_data = {
-  username:`${username}`,
-  password: `${password}`
-}
+
+
 
 form.addEventListener("submit", function(event){
   event.preventDefault()
+  var username = document.getElementById("username").value;
+  var password = document.getElementById("password").value;
+
+  var user_data = {
+    username:`${username}`,
+    password: `${password}`
+  }
+
   fetch("/signUp", {
-    method: 'POST', // or 'PUT'
-    body: JSON.stringify(user_data), // data can be `string` or {object}!
+    method: 'POST',
+    body: JSON.stringify(user_data),
     headers:{
       'Content-Type': 'application/json'
+    },
+  })
+  .then(res => {
+    if (res.redirected){
+      window.location.href = res.url
     }
   })
 })

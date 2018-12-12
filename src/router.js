@@ -9,9 +9,12 @@ const router = (request, response) => {
   if ( url === '/') {
     handlers.homeRouterHandler(request, response)
   } else if ( url.includes('/Public/')){
+    
     handlers.publicHandler(request, response)
-  } else if (url === "/onload"){
-    handlers.onLoad(request, response)
+  }else if ( url === ('/signUp')){
+      handlers.signUpHandler(request, response)
+  // } else if (url === "/onload"){
+  //   handlers.onLoad(request, response)
   }else{
     handlers.errorhandler(request, response);
   }
