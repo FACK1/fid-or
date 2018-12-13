@@ -2,8 +2,8 @@ const fs = require('fs');
 const path = require('path');
 const dbConnection = require('./database/db_connection.js');
 const bcrypt = require('bcryptjs');
-const qs = require('querystring');
-
+const jwt = require('jsonwebtoken'); ///process.env.SECRET
+require("env2")("config.env");
 
 const homeRouterHandler = (request, response) => {
   const htmlPath = path.join(__dirname, "../Public/index.html");
@@ -91,14 +91,15 @@ const loginHandler = (request, response) => {
   request.on('end', () => {
   const { username, password } = JSON.parse(loginBody)
 
-  const passQuery = `select password from users where username = $1`;
-
-  dbConnection.query(passQuery, [username],
-   (err, existingPass) => {
+  const passQuery = `select password, id from users where username = $1`;
+  const userArray = [username]
+  dbConnection.query(passQuery,userArray ,
+   (err, userDetails) => {
      if (err){
        console.log(err)
      } else {
-       bcrypt.compare(password, existingPass.rows[0].password, (err, passwordsMatch) => {
+
+       bcrypt.compare(password, userDetails.rows[0].password, (err, passwordsMatch) => {
       if (err) {
         res.statusCode = 500;
         res.end('Error logging in')
@@ -110,8 +111,14 @@ const loginHandler = (request, response) => {
         response.end('There was a problem with your login details')
       }
       else{
-        
-          response.writeHead(302, {"location": "/Public/todo-list.html"});
+        const secret = process.env.SECRET
+        user_id = userDetails.rows[0].id
+        const user_cookie = jwt.sign(user_id, secret);
+        console.log(user_cookie)
+
+          response.writeHead(302, {
+            "set-cookie":`${user_cookie}`,
+            "location": "/Public/todo-list.html"});
           response.end();
           };
         })
