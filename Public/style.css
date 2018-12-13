@@ -1,0 +1,97 @@
+body{
+  background-color: #d8caaa;
+
+}
+
+header{
+  text-align: center;
+  margin-bottom: 10px;
+  /* font-size: 30px; */
+  font-family: 'Courgette';
+  color: #505160;
+}
+
+.container{
+  text-align: center;
+  margin-top: -20px;
+}
+
+.login-container{
+  text-align: center;
+  margin-top: -20px;
+}
+
+input{
+  width: 150px;
+  margin-top: 15px;
+
+}
+button{
+  width: 155px;
+  margin-top: 15px;
+}
+
+#login-form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 93px;
+}
+.reg-form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 93px;
+}
+
+
+.headings-div{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+}
+
+.add-form{
+text-align: center;
+
+}
+
+.logout-btn{
+  width: 70px;
+  height: 25px;
+}
+
+.main-hd{
+  margin-left: 10px;
+}
+
+#delete-button{
+  width:22px;
+  border-radius: 8px;
+}
+#add-button{
+  width:22px;
+  border-radius: 8px;
+}
+
+#mark-button{
+  width:22px;
+  border-radius: 8px;
+}
+
+#todo-text{
+  border-radius: 8px;
+  width: 250px;
+}
+
+
+
+@media screen and (min-width: 900px){
+  .reg-form{
+    margin-left: 560px;
+  }
+  #login-form{
+    margin-left: 560px;
+  }
+}
