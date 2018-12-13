@@ -1,7 +1,6 @@
 var loginForm = document.getElementById('login-form');
 
 loginForm.addEventListener('submit',function (event) {
-  console.log(event)
   event.preventDefault();
 
   var loginUsername = document.getElementById("login-username").value;
@@ -20,7 +19,11 @@ loginForm.addEventListener('submit',function (event) {
       'Content-Type': 'application/json'
     }
   })
+  .catch(err => {
+    console.log(err)
+  })
     .then(res => {
+      console.log(res)
       if (res.redirected){
         window.location.href = res.url
       }
