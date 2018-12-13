@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Todo App!</title>
-    <link href="Public/style.css" rel="stylesheet">
+    <link href="/Public/style.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Amaranth|Courgette" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
@@ -11,12 +11,15 @@
     <header>
       <div class="headings-div">
         <h1 class="main-hd">Fid-Or Todo App </h1>
+        <button type="click" name="logout" class="logout-btn">Log out</button>
       </div>
       <div class="add-div">
         <h2 class="sub-hd">Organize your tasks!</h2>
         <form class="add-form">
           <input type="text" id="todo-text" placeholder="Add Your Todo Item !">
-          <button type="button" id="add-button">Add</button>
+          <button type="button" id="add-button">+</button>
+          <button type="button" id="delete-button">X</button>
+          <button type="button" id="mark-button">√</button>
         </form>
       </div>
     </header>
